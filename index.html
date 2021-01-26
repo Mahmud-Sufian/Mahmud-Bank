@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahmud Bank</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="login-area">
+        <h1 class="text-center">Welcome To Mahmud Bank</h1>
+        <div class="submit-area">
+            <h4>Login</h4>
+            <input type="email" class="form-control" placeholder="Email">
+            <br>
+            <input type="password" class="form-control" placeholder="password">
+            <br>
+            <button id="login-btn" class="btn btn-success">Enter</button>
+        </div>
+    </div>
+    <div id="transaction">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="status deposit">
+                    <h5>Deposit</h5>
+                    <h2>$ <span id="deposit-span">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="status withdraw">
+                    <h5>Withdraw</h5>
+                    <h2>$ <span id="withdraw-span">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="status balance">
+                    <h5>Balance</h5>
+                    <h2>$ <span id="balance-span">1240</span> </h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Deposit</h4>
+                    <br>
+                    <input id="deposit-input" type="text" class="form-control" placeholder="$ Amount You Want To Deposit">
+                    <br>
+                    <button id="deposit-btn" class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Withdraw</h4>
+                    <br>
+                    <input id="withdraw-input" type="text" class="form-control" placeholder="$ Amount You Want To Withdraw">
+                    <br>
+                    <button id="withdraw-btn" class="btn btn-success">Withdraw</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // login area
+        document.getElementById("login-btn").addEventListener("click", function () {
+            document.getElementById("login-area").style.display = "none";
+            document.getElementById("transaction").style.display = "block";
+        })
+        // deposit handler
+        const depositBtn = document.getElementById("deposit-btn");
+        depositBtn.addEventListener("click", function(){
+           const depositInputNumber = addInputValue("deposit-input");
+  
+            addSpanValue("balance-span", depositInputNumber);
+            addSpanValue("deposit-span", depositInputNumber);
+           
+            
+
+            document.getElementById("deposit-input").value = "";
+        })
+        // withdraw handler
+        const withdrawBtn = document.getElementById("withdraw-btn");
+        withdrawBtn.addEventListener("click", function(){
+            const withdrawInputNumber = addInputValue("withdraw-input");
+
+            addSpanValue("withdraw-span", withdrawInputNumber);
+            addSpanValue("balance-span", -1 * withdrawInputNumber);
+             
+            document.getElementById("withdraw-input").value = "";
+        })
+        // depositInput + withdrawInput handler
+        function addInputValue(id){
+            const input = document.getElementById(id).value;
+            const inputNumber = parseFloat(input);
+            return inputNumber;
+        }
+
+        // deposit + balance handler function
+        function addSpanValue(id, depositInputNumber){
+            const balance = document.getElementById(id).innerText;
+            const balanceNumber = parseFloat(balance);
+            const totalBalance = balanceNumber + depositInputNumber;
+            document.getElementById(id).innerText = totalBalance;
+        }
+
+    </script>
+</body>
+
+</html>
