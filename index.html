@@ -76,13 +76,17 @@
         const depositBtn = document.getElementById("deposit-btn");
         depositBtn.addEventListener("click", function(){
            const depositInputNumber = addInputValue("deposit-input");
-  
+            
+           if(depositInputNumber < 0){
+               alert("Don't Diposit Negative Number")
+           }
+           else{
             addSpanValue("balance-span", depositInputNumber);
             addSpanValue("deposit-span", depositInputNumber);
-           
             
-
             document.getElementById("deposit-input").value = "";
+           }
+            
         })
         // withdraw handler
         const withdrawBtn = document.getElementById("withdraw-btn");
